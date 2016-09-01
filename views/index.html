@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html ng-app = 'myApp'>
+  <head>
+    <meta charset="utf-8">
+    <title>Welcome to Free America: Cast of Characters</title>
+    <script src="vendors/angular.min.js" type="text/javascript"></script>
+    <script src="scripts/client.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <h1> Angular Example </h1>
+    <div ng-controller = 'sampleController'>
+      <h2> Sample Controller 1 </h2>
+    <input type= "text" ng-model= "sampleBinder" value= "" placeholder="2 way bind">
+    <input type= "text" ng-model= "sampleBinder2" value= "" placeholder="2 way bind">
+    <p> Two way bind output: {{ sampleBinder }}{{ sampleBinder2 }} </p>
+    <button type="button" name="button" ng-click= "checkInput()" >check input</button>
+    <ul>
+      <li ng-repeat='record in outsideArray'>{{ record.first}} {{record.second}}</li>
+    </div>
+    <!-- <div ng-controller = 'sampleController2'>
+      <h2>Sample Controller 2 </h2>
+
+    </div> -->
+  </body>
+</html>
