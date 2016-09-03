@@ -3,11 +3,15 @@ var app = express();
 var path=require('path');
 var bodyParser=require('body-parser');
 var urlencodedParser=bodyParser.urlencoded( { extended: false } );
+
 var pg=require('pg');
 // postgres must be running and you must have this db name correct
 var connectionString = 'postgres://localhost:5432/characterList';
+app.use(bodyParser.json());
+
 // static public folder
 app.use( express.static( 'public' ) );
+
 
 // base url
 app.get( '/', function( req, res ){
@@ -17,30 +21,43 @@ app.get( '/', function( req, res ){
 
 app.post('/sendToDb', urlencodedParser, function(req, res) { // sends data to characters database
     console.log("in app.post");
-    characterToInput = { name: req.body.name,
-                        sketch: req.body.sketch,
-                        affiliations: req.body.affiliations,
-                        issues: req.body.issues,
-                        bio: req.body.bio };
+    // var objectToSend = { name: req.body.name,
+    //                         sketch: req.body.sketch,
+    //                         affiliations: req.body.affiliations,
+    //                         issues: req.body.issues,
+    //                         bio: req.body.bio };
+    var charName = req.body.name;
+    var charSketch = req.body.sketch;
+    var charAffiliations = req.body.affiliations;
+    var charIssues = req.body.issues;
+    var charBio = req.body.bio;
+          // console.log( objectToSend, "objectToSend") ;
+          pg.connect( connectionString, function( err, client, done ){
+          client.query( 'INSERT INTO character ( name, sketch, affiliations, issues, bio) VALUES ($1, $2, $3, $4, $5)', [ charName, charSketch, charAffiliations, charIssues, charBio ]);
+          console.log("this is what should send",   charName, charSketch, charAffiliations, charIssues, charBio);
+        });
+      }); // end POST
 
-    pg.connect(connectionString, function(err, client, done) {  // connecting to disinfectants database
-      if (err) {     // check for errors
-      console.log(err);
-    } else {
-        var character = client.query("INSERT INTO character ( name, sketch, affiliations, issues, bio) VALUES($1, $2, $3, $4, $5)", [ req.body.name, req.body.sketch, req.body.affiliations, req.body.issues, req.body.bio ]);  // send data to database
-        character.on('row', function(row) {  // pushing to array
-          results.push(row);
-        });  // end query push
-        character.on('end', function() {  // sending to scripts
-          console.log("character info to input from app.post in app");
-          console.log( characterToInput );
-          console.log(results, "results");
-          return res.json(results);
-        }); // end products.on function
-      done(); // signals done
-    } // end else
-  }); // end pg connect function
-}); // end app.post /sendToDb function
+
+
+//     pg.connect(connectionString, function(err, client, done) {  // connecting to disinfectants database
+//       if (err) {     // check for errors
+//       console.log(err);
+//     } else {
+//         client.query("INSERT INTO character ( name, sketch, affiliations, issues, bio) VALUES($1, $2, $3, $4, $5)", [ req.body.name, req.body.sketch, req.body.affiliations, req.body.issues, req.body.bio ]);  // send data to database
+//         // character.on('row', function(row) {  // pushing to array
+//         //   results.push(row);
+//         // });  // end query push
+//         // character.on('end', function() {  // sending to scripts
+//           // console.log("character info to input from app.post in app");
+//           // console.log( characterToInput );
+//           // console.log(results, "results");
+//           // return res.json(results);
+//         // }); // end products.on function
+//       done(); // signals done
+//     } // end else
+//   }); // end pg connect function
+// }); // end app.post /sendToDb function
 
 app.get( '/getChars', function( req, res ){
   var results = [];

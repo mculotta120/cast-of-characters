@@ -10,7 +10,7 @@ console.log("in charInputController");
     $scope.submitCharacter = function() {
       // event.preventDefault();
       var objectToSend ={  // package inputs into object to send
-        name: $scope.characterNameIn,  // reference these in questionnaire.html
+        name: $scope.characterNameIn,
         sketch: $scope.characterSketchIn,
         affiliations: $scope.affiliationsIn,
         issues: $scope.issuesIn,
@@ -24,6 +24,10 @@ console.log("in charInputController");
       console.log(objectToSend, "object");
 
   }; // end submitCharacter function
+  }]); //end charInputController
+
+myApp.controller('charDisplayController', [ '$scope', '$http', function( $scope, $http ){
+
 $scope.getCharacters = function(){
   $http({  // sends object via POST
     method: 'GET',
@@ -34,5 +38,4 @@ $scope.getCharacters = function(){
   }); // end get call
 };
 
-
-}]);
+}]); //end charDisplayController
