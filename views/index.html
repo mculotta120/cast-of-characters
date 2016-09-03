@@ -7,15 +7,19 @@
     <script src="scripts/client.js" type="text/javascript"></script>
   </head>
   <body>
-    <h1> Angular Example </h1>
-    <div ng-controller = 'sampleController'>
-      <h2> Sample Controller 1 </h2>
-    <input type= "text" ng-model= "sampleBinder" value= "" placeholder="2 way bind">
-    <input type= "text" ng-model= "sampleBinder2" value= "" placeholder="2 way bind">
-    <p> Two way bind output: {{ sampleBinder }}{{ sampleBinder2 }} </p>
-    <button type="button" name="button" ng-click= "checkInput()" >check input</button>
-    <ul>
-      <li ng-repeat='record in outsideArray'>{{ record.first}} {{record.second}}</li>
+    <h1> Input Character Information </h1>
+    <div ng-controller = 'charInputController' ng-init="getCharacters()">
+    <input type= "text" ng-model= "characterNameIn" name= "characterNameIn" value= "" placeholder="Character's Name">
+    <input type= "text" ng-model= "characterSketchIn" name= "characterSketchIn" value= "" placeholder="Character's Sketch URL">
+    <input type= "text" ng-model= "affiliationsIn" name= "affiliationsIn" value= "" placeholder="Character's Affiliations">
+    <input type= "text" ng-model= "issuesIn" name= "issuesIn" value= "" placeholder="Issues in which Character Appears">
+    <input type= "text" ng-model= "characterBioIn" name= "characterBioIn" value= "" placeholder="Character's Bio">
+    <button type="button" name="button" ng-click= "submitCharacter()">Enter</button>
+    <ul ng-repeat='character in characters'>
+        <li>{{character.name}}</li>
+        <li>{{character.affiliations}}</li>
+        <li>{{character.issues}}</li>
+        <li>{{character.bio}}</li>
     </div>
     <!-- <div ng-controller = 'sampleController2'>
       <h2>Sample Controller 2 </h2>

@@ -3,23 +3,36 @@ console.log("client.js is sourced");
 //create an ng app for the page
 var myApp = angular.module( 'myApp', [] );
 //create a controller
-myApp.controller('sampleController', [ '$scope', function( $scope ){
-  $scope.outsideArray = [];
-  $scope.checkInput = function(){
+myApp.controller('charInputController', [ '$scope', '$http', function( $scope, $http ){
+console.log("in charInputController");
+  $scope.characters = [];
 
-    var input1 = $scope.sampleBinder;
-    var input2 = $scope.sampleBinder2;
+    $scope.submitCharacter = function() {
+      // event.preventDefault();
+      var objectToSend ={  // package inputs into object to send
+        name: $scope.characterNameIn,  // reference these in questionnaire.html
+        sketch: $scope.characterSketchIn,
+        affiliations: $scope.affiliationsIn,
+        issues: $scope.issuesIn,
+        bio: $scope.characterBioIn
+        }; // end object
+      $http({  // sends object via POST
+        method: 'POST',
+        url: '/sendToDb',
+        data: objectToSend
+      }); // end post call
+      console.log(objectToSend, "object");
 
-    console.log('input gathered: ' + input1 + " " + input2 );
+  }; // end submitCharacter function
+$scope.getCharacters = function(){
+  $http({  // sends object via POST
+    method: 'GET',
+    url: '/getChars',
+  }).then(function( response ){
+      console.log( response, "response" );
+      $scope.characters = response.data;
+  }); // end get call
+};
 
-    var objectToSend = {
-      "first": input1,
-      "second": input2
-    };
 
-    $scope.outsideArray.push(objectToSend);
-
-    console.log("objectToSend : " + objectToSend );
-
-  }; //end check input function
 }]);
