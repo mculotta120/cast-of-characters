@@ -5,8 +5,16 @@
     <title>Welcome to Free America: Cast of Characters</title>
     <script src="vendors/angular.min.js" type="text/javascript"></script>
     <script src="scripts/client.js" type="text/javascript"></script>
+    <script src="vendors/jquery.js"></script>
+    <script src="vendors/ui-bootstrap.js"></script>
+    <script src="vendors/ui-bootstrap-tpls.js"></script>
+    <script src="vendors/bootstrap.js"></script>
+    <script src="vendors/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="vendors/bootstrap.min.css">
+    <link rel="stylesheet" href="vendors/bootstrap.css">
   </head>
   <body>
+
     <h1> Input Character Information </h1>
     <div ng-controller = 'charInputController'>
     <input type= "text" ng-model= "characterNameIn" name= "characterNameIn" value= "" placeholder="Character's Name">
@@ -24,6 +32,34 @@
         <li>{{character.bio}}</li>
         <li>{{character.affiliations}}</li>
         <li>{{character.issues}}</li>
-    </div>
+        <button type="button" name="editButton" ng-click= "editChar( $index )">Edit</button>
+        <button type="button" name="deleteButton" ng-click="deleteCharacter( character )">Delete</button>
+        <!-- Trigger the modal with a button -->
+        <button type="button"  data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+          <div class="modal-dialog modal-sm">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+              </div>
+              <div class="modal-body">
+                <p>Some text in the modal.</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+</div>
+
   </body>
 </html>
