@@ -32,30 +32,23 @@ app.post('/deleteChar', urlencodedParser, function(req, res) { // sends data to 
   res.send("res success");
   });
 
+  app.post('/edit', urlencodedParser, function(req, res) { // sends data to characters database
+      var id = req.body.id;
+      var newName = req.body.newName;
+      var newSketch = req.body.newSketch;
+      var newAffiliations = req.body.newAffiliations;
+      var newIssues = req.body.newIssues;
+      var newBio = req.body.newBio;
 
+      console.log("updating Character, ", id);
+      pg.connect( connectionString, function( err, client, done){
+        console.log("req.body.id  ", req.body.id);
+        client.query("UPDATE character SET name = ($1), sketch = ($2), affiliations = ($3), issues = ($4), bio = ($5) WHERE id = ($6)", [newName, newSketch, newAffiliations, newIssues, newBio, id]);
+    done();
+    }); // end pg.connect
+    res.send("res success");
+    });
 
-  // app.post("/deleteTask", urlencodedParser, function(req, res){
-  //   pg.connect( connectionString, function( err, client, done ){
-  //     client.query("DELETE FROM tasks WHERE id = ($1)", [req.body.id]);
-  //     done();
-  //   }); // end pg.connect
-  //   res.send("res success");
-  // }); // end /deleteTask
-
-// router.delete ('/', function( req, res ){
-//   console.log('going to delete!');
-//   pg.connect( connectionString, function( err, client, done){
-//     console.log("req.body.id  ", req.body);
-//   });
-//   var deleteQuery = client.query ('DELETE from students WHERE id=' + req.body.id+ ';');
-//   if(err){
-//     res.sendStatus(500);
-//   }else{
-//     res.sendStatus(200);
-//   }
-//   done();
-//   res.end();
-// });//end DELETE
 
 app.post('/sendToDb', urlencodedParser, function(req, res) { // sends data to characters database
     console.log("in app.post");

@@ -1,7 +1,7 @@
 console.log("client.js is sourced");
 
 //create an ng app for the page
-var myApp = angular.module( 'myApp',  [ 'ui.bootstrap' ] );
+var myApp = angular.module( 'myApp', ['ui.bootstrap']);
 //create a controller
 myApp.controller('charInputController', [ '$scope', '$http',  function( $scope, $http){
 console.log("in charInputController");
@@ -23,11 +23,16 @@ console.log("in charInputController");
       }); // end post call
       console.log(objectToSend, "object");
 
+      $scope.characterNameIn = '';
+      $scope.characterSketchIn = '';
+      $scope.affiliationsIn = '';
+      $scope.issuesIn = '';
+      $scope.characterBioIn = '';
   }; // end submitCharacter function
   }]); //end charInputController
 
 
-myApp.controller('charDisplayController', [ '$scope', '$http', '$uibModal', function( $scope, $http,  $uibModal ){
+myApp.controller('charDisplayController', [ '$scope', '$http',  function( $scope, $http ){
 
 $scope.getCharacters = function(){
   $http({  // sends object via POST
@@ -55,40 +60,23 @@ $scope.deleteCharacter = function( character ){
   }); //end delete
 }; //end deleteCharacter
 
-$scope.editChar = function( index ) {
-   index.id = index;
-  $uibModal.open({
-    templateUrl: 'views/editCharacter.html',
-    controller: 'editPopupController',
-    size:'sm',
-    resolve: {
-      index: function(){
-      return index;
-      } // end index
-    } // end resolve
-  }); // end $modal.open
-}; // end editStoryCover
+$scope.editChar = function( character ) {
+console.log("editChar index", character);
+// $scope.editCharNameIn = $scope.character.name;
+var objectToEdit ={  // package inputs into object to send
+  id: character.id,
+  newName: character.name,
+  newSketch: character.sketch,
+  newAffiliations: character.affiliations,
+  newIssues: character.issues,
+  newBio: character.bio
+  }; // end object
+$http({  // sends object via POST
+  method: 'POST',
+  url: '/edit',
+  data: objectToEdit
+}); // end post call
+console.log(objectToEdit, "object");
+}; // end editChar
 
 }]); //end charDisplayController
-
-angular.module('myApp').controller('editPopupController',
-function ($scope, $uibModalInstance, index) {
-
-  // var arrayNum = $rootScope.storyArrayIndex;
-  //
-  // if ($scope.isNewOrEdit === 0) {
-  //   $scope.tempTitle = $rootScope.tempNewStoryArray.story_title;
-  //   $scope.tempDescription = $rootScope.tempNewStoryArray.story_description;
-  //   $scope.tempCover = $rootScope.tempNewStoryArray.story_cover;
-  //   $scope.changeCoverInfo = $rootScope.tempNewStoryArray;
-  // } else {
-  //   $scope.tempTitle = $rootScope.storyIndex.story_title;
-  //   $scope.tempDescription = $rootScope.storyIndex.story_description;
-  //   $scope.tempCover = $rootScope.storyIndex.story_cover;
-  //   $scope.changeCoverInfo = $rootScope.storyIndex;
-  // } // end else
-
-  $rootScope.cancel = function() {
-    $uibModalInstance.close();
-  }; // end cancel
-}); // end editPopupController
