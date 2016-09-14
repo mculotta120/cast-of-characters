@@ -1,8 +1,26 @@
 console.log("client.js is sourced");
 
 //create an ng app for the page
-var myApp = angular.module( 'myApp', ['ui.bootstrap']);
+var myApp = angular.module( 'myApp', ['ngRoute', 'ui.bootstrap' ]);
 //create a controller
+myApp.config(['$routeProvider', function($routeProvider){
+  $routeProvider.
+      when("/home", {
+          templateUrl: "/views/routes/home.html"
+      }).
+      when("/addCharacter", {
+        templateUrl: "/views/routes/addCharacter.html",
+        controller: "charInputController"
+      }).
+      when("/characterList", {
+        templateUrl: "/views/routes/characterList.html",
+        controller: "charDisplayController"
+      }).
+      otherwise({
+        redirectTo: "/home"
+      });
+}]);
+
 myApp.controller('charInputController', [ '$scope', '$http',  function( $scope, $http){
 console.log("in charInputController");
   $scope.characters = [];

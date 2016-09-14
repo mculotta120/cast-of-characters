@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app = 'myApp'>
+  <head>
+    <meta charset="utf-8">
+    <title>Welcome to Free America: Cast of Characters</title>
+    <script src="vendors/angular.min.js" type="text/javascript"></script>
+    <script src="vendors/angular-route.js" type="text/javascript" ></script>
+    <script src="scripts/client.js" type="text/javascript"></script>
+    <script src="vendors/jquery.js"></script>
+    <script src="vendors/ui-bootstrap.js"></script>
+    <script src="vendors/ui-bootstrap-tpls.js"></script>
+    <script src="vendors/bootstrap.js"></script>
+    <script src="vendors/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="vendors/bootstrap.min.css">
+    <link rel="stylesheet" href="vendors/bootstrap.css">
+  </head>
+  <body>
+    <header>
+<div ng-include= '"/views/partials/nav.html"'>
+      <!-- <ul class="nav nav-tabs">
+    <li class="active"><a href="#">Home</a></li>
+    <li><a href="#characterList.html">Character List</a></li>
+    <li><a href="#addCharacter.html">Add Character</a></li>
+  </ul> -->
+    </header>
+  <main ng-view></main>
+
+
+
+
+  </body>
+</html>
