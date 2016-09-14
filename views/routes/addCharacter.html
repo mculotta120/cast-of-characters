@@ -1,0 +1,13 @@
+<div class="tab-content">
+  <div id="home" class="tab-pane fade">
+    <h1> Input Character Information </h1>
+    <div ng-controller = 'charInputController'>
+    <input type= "text" ng-model= "characterNameIn" name= "characterNameIn" value= "" placeholder="Character's Name">
+    <input type= "text" ng-model= "characterSketchIn" name= "characterSketchIn" value= "" placeholder="Character's Sketch URL">
+    <input type= "text" ng-model= "affiliationsIn" name= "affiliationsIn" value= "" placeholder="Character's Affiliations">
+    <input type= "text" ng-model= "issuesIn" name= "issuesIn" value= "" placeholder="Issues in which Character Appears">
+    <input type= "text" ng-model= "characterBioIn" name= "characterBioIn" value= "" placeholder="Character's Bio">
+    <button type="button" name="button" ng-click= "submitCharacter()">Enter</button>
+    </div>
+  </div>
+</div>
