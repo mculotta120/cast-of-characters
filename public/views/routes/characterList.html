@@ -6,20 +6,32 @@
       <li>{{character.bio}}</li>
       <li>{{character.affiliations}}</li>
       <li>{{character.issues}}</li>
-      <button type="button" name="editButton" ng-click='toggleModal()'>Edit</button>
       <button type="button" name="deleteButton" ng-click="deleteCharacter( character )">Delete</button>
-<div ng-app='ModalDemo'>
-<div ng-controller='MyCtrl'>
-<modal-dialog show='modalShown' width='85%' height='95%'>
-  <div id="editCharacterInfo" class="collapse">
-    <input type= "text" ng-model= "character.name" name= "editCharNameIn" value= "" placeholder="Character's New Name">
-    <input type= "text" ng-model= "character.sketch" name= "editCharSketchIn" value= "" placeholder="Character's New Sketch URL">
-    <input type= "text" ng-model= "character.affiliations" name= "editCharAffiliationsIn" value= "" placeholder="Character's New Affiliations">
-    <input type= "text" ng-model= "character.issues" name= "editCharIssuesIn" value= "" placeholder="Issues in which Character Appears">
-    <input type= "text" ng-model= "character.bio" name= "editCharBioIn" value= "" placeholder="Character's New Bio">
-    <button type="button" name="button" ng-click= "editChar( character )">Submit Changes</button>
-  </div>
-</div>
-</div>
+      <div ng-controller="ModalDemoCtrl as $ctrl">
+          <script type="text/ng-template" id="myModalContent.html">
+              <div class="modal-header">
+                  <h3 class="modal-title" id="modal-title">Edit {{character.name}}</h3>
+              </div>
+              <div class="modal-body" id="modal-body">
+                  <input type= "text" ng-model= "character.name" name= "editCharNameIn" value= "" placeholder="Character's New Name"><br>
+                  <input type= "text" ng-model= "character.sketch" name= "editCharSketchIn" value= "" placeholder="Character's New Sketch URL"><br>
+                  <input type= "text" ng-model= "character.affiliations" name= "editCharAffiliationsIn" value= "" placeholder="Character's New Affiliations"><br>
+                  <input type= "text" ng-model= "character.issues" name= "editCharIssuesIn" value= "" placeholder="Issues in which Character Appears"><br>
+                  <input type= "text" ng-model= "character.bio" name= "editCharBioIn" value= "" placeholder="Character's New Bio"><br>
+                  <button type="button" name="button" ng-click= "editChar( character )">Submit Changes</button>
+              </div>
+              <div class="modal-footer">
+                  <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">Done</button>
+                  <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+              </div>
+          </script>
+          <button type="button" name="editButton" ng-click="$ctrl.open( character )">Edit</button>
+          <!-- <button type="button" class="btn btn-default" ng-click="$ctrl.open()">Open me!</button> -->
+          <!-- <button type="button" class="btn btn-default" ng-click="$ctrl.open('lg')">Large modal</button>
+          <button type="button" class="btn btn-default" ng-click="$ctrl.open('sm')">Small modal</button>
+          <button type="button" class="btn btn-default" ng-click="$ctrl.toggleAnimation()">Toggle Animation ({{ $ctrl.animationsEnabled }})</button>
+          <button type="button" class="btn btn-default" ng-click="$ctrl.openComponentModal()">Open a component modal!</button> -->
+          <!-- <div ng-show="$ctrl.selected">Selection from a modal: {{ $ctrl.selected }}</div> -->
+      </div>
 </div>
 </div>
