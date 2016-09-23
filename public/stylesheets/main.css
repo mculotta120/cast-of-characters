@@ -16,3 +16,11 @@ body{
   font-family: 'Ubuntu', sans-serif;
   color: rgba(112, 66, 205, 1)
 }
+.eachCharacter{
+  height: 300px;
+  width: 200px;
+  border-style: solid;
+  border-width: thin;
+  border-color: black;
+  margin: 5px;
+}

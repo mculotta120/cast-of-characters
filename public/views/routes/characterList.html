@@ -1,33 +1,38 @@
 <div class="tab-content">
 <h1> Current Character List </h1>
-<div ng-controller = 'charDisplayController' ng-init="getCharacters()">
-  <ul ng-repeat='character in characters'>
-      <li><b><h3>{{character.name}}</h3></b></li>
-      <li>{{character.bio}}</li>
-      <li>{{character.affiliations}}</li>
-      <li>{{character.issues}}</li>
-      <button type="button" name="deleteButton" ng-click="deleteCharacter( character )">Delete</button>
-      <div ng-controller="ModalDemoCtrl as $ctrl">
-          <script type="text/ng-template" id="myModalContent.html">
-              <div class="modal-header">
-                  <h3 class="modal-title" id="modal-title">Edit {{character.name}}</h3>
+<div ng-controller= 'charDisplayController' ng-init="getCharacters()">
+    <div class="container">
+      <div class="row">
+        <div class="eachCharacter col-sm-4" ng-repeat='character in characters'>
+          <p><b><h3>{{character.name}}</h3></b></p>
+          <p>{{character.bio}}</p>
+          <p>{{character.affiliations}}</p>
+          <p>{{character.issues}}</p>
+          <button type="button" name="deleteButton" ng-click="deleteCharacter( character )">Delete</button>
+          <div ng-controller="ModalDemoCtrl as $ctrl">
+            <button type="button" name="editButton" ng-click="$ctrl.open( character )">Edit</button>
+              <script type="text/ng-template" id="myModalContent.html">
+                  <div class="modal-header">
+                      <h3 class="modal-title" id="modal-title">Edit {{character.name}}</h3>
+                  </div>
+                  <div class="modal-body" id="modal-body">
+                    <div ng-controller = 'charDisplayController'>
+                        <input type= "text" ng-model= "character.name" name= "editCharNameIn" value= "" placeholder="Character's New Name"><br>
+                        <input type= "text" ng-model= "character.sketch" name= "editCharSketchIn" value= "" placeholder="Character's New Sketch URL"><br>
+                        <input type= "text" ng-model= "character.affiliations" name= "editCharAffiliationsIn" value= "" placeholder="Character's New Affiliations"><br>
+                        <input type= "text" ng-model= "character.issues" name= "editCharIssuesIn" value= "" placeholder="Issues in which Character Appears"><br>
+                        <input type= "text" ng-model= "character.bio" name= "editCharBioIn" value= "" placeholder="Character's New Bio"><br>
+                        <button type="button" name="button" ng-click= "editChar( character )">Submit Changes</button>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                      <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">Done</button>
+                      <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+                  </div>
+              </script>
               </div>
-              <div class="modal-body" id="modal-body">
-                <div ng-controller = 'charDisplayController'>
-                    <input type= "text" ng-model= "character.name" name= "editCharNameIn" value= "" placeholder="Character's New Name"><br>
-                    <input type= "text" ng-model= "character.sketch" name= "editCharSketchIn" value= "" placeholder="Character's New Sketch URL"><br>
-                    <input type= "text" ng-model= "character.affiliations" name= "editCharAffiliationsIn" value= "" placeholder="Character's New Affiliations"><br>
-                    <input type= "text" ng-model= "character.issues" name= "editCharIssuesIn" value= "" placeholder="Issues in which Character Appears"><br>
-                    <input type= "text" ng-model= "character.bio" name= "editCharBioIn" value= "" placeholder="Character's New Bio"><br>
-                    <button type="button" name="button" ng-click= "editChar( character )">Submit Changes</button>
-                </div>
-              </div>
-              <div class="modal-footer">
-                  <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">Done</button>
-                  <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
-              </div>
-          </script>
-          <button type="button" name="editButton" ng-click="$ctrl.open( character )">Edit</button>
+           </div>
+        </div>
       </div>
-</div>
+    </div>
 </div>
