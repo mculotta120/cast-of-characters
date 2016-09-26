@@ -3,7 +3,7 @@
 <div ng-controller= 'charDisplayController' ng-init="getCharacters()">
     <div class="container">
       <div class="row">
-        <div class="eachCharacter col-sm-4" ng-repeat='character in characters'>
+        <div class="eachCharacter col-sm-4 text-center" ng-repeat='character in characters'>
           <p><b><h3>{{character.name}}</h3></b></p>
           <p>{{character.bio}}</p>
           <p>{{character.affiliations}}</p>

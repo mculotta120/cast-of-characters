@@ -1,7 +1,10 @@
 body{
-  background-image: url("/images/beads.jpg");
+  /*background-image: url("/images/beads.jpg");
   background-size: 100% 100%;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat;*/
+}
+h1{
+  text-align: center;
 }
 #nav{
   background-color: rgba(151, 205, 66, .9);
