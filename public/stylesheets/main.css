@@ -1,16 +1,15 @@
 body{
-  /*background-image: url("/images/beads.jpg");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;*/
+  background-color: #220901;
 }
 h1{
   text-align: center;
-  margin: 20px;
+  margin-bottom: 50px;
 }
 #nav{
-  background-color: rgba(151, 205, 66, .9);
+  background-color: #621708;
   font-family: 'Ubuntu', sans-serif;
   font-size: 2em;
+  color: #BC3908;
 }
 .tab-content{
   background-color: rgba(222, 213, 130, .95);
@@ -18,7 +17,7 @@ h1{
   padding: 50px;
   margin: 20px;
   font-family: 'Ubuntu', sans-serif;
-  color: rgba(112, 66, 205, 1)
+  color: #BC3908;
 }
 .eachCharacter{
   height: 300px;
